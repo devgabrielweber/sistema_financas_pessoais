@@ -13,8 +13,8 @@ class transacao
 
     public function listar()
     {
-        $listagem = $this->conn->query("SELECT * FROM " . $_ENV['DB_NAME'] . ".
-        transacoes ORDER BY id");
+        $listagem = $this->conn->query("SELECT transacoes.id, tipo, valor, beneficiarios.nome as 'Nome Beneficiario', contas.nome as 'Conta', categorias.nome as 'Categoria' FROM " . $_ENV['DB_NAME'] . ".
+            transacoes INNER JOIN beneficiarios ON transacoes.id_beneficiario = beneficiarios.id INNER JOIN contas ON transacoes.id_conta = contas.id INNER JOIN categorias ON transacoes.id_categoria = categorias.id ORDER BY transacoes.id DESC");
 
         while ($row = $listagem->fetch_assoc()) {
             $resul_preparado[] = $row;
@@ -75,9 +75,10 @@ class transacao
     public function ver($dados)
     {
         $query = "SELECT * FROM transacoes WHERE id = " . $dados['id'];
-        $result = $this->conn->query($query);
 
         file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n a query retornada no model de categorias.ver:" . $query, FILE_APPEND);
+
+        $result = $this->conn->query($query);
 
         file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n categorias.ver no controller resutou isso na query:" . json_encode($result), FILE_APPEND);
 

@@ -7,7 +7,7 @@ if (!isset($dados)) {
     die();
 }
 $htmlFinal = $htmlPagina->geraGrid([
-    'titulo' => 'Listar transações',
+    'titulo' => 'Listar Transações',
     'dados' => $dados,
     'botoes' => [
         'cadastrar' => 'transacoes.cadastrar'

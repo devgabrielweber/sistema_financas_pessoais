@@ -79,7 +79,8 @@ $htmlFinal = $htmlPagina->geraForm(
             ],
             'valor' => [
                 'tipo' => 'number',
-                'valor' => isset($_SESSION['dados'][0]['valor']) ? $_SESSION['dados'][0]['valor'] : ''
+                'valor' => isset($_SESSION['dados'][0]['valor']) ? $_SESSION['dados'][0]['valor'] : '',
+                'step' => '.01'
             ],
             'categoria' => [
                 'tipo' => 'select',

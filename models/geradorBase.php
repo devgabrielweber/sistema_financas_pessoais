@@ -22,18 +22,19 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
+    max-height: 100vh;
 }
 
 /* Menu lateral */
 .sidebar {
-    width: 250px;
+     width: 250px;
     background-color: #2c3e50;
     color: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: top;
-    position: relative;
+    position: fixed;
+    height: 100vh;
 }
 
 .sidebar h2 {
@@ -61,6 +62,7 @@ body {
 
 /* Área principal */
 .main-content {
+    margin-left: 250px;
     flex-grow: 1;
     padding: 20px;
     background-color: #ecf0f1;
@@ -241,7 +243,14 @@ tr:hover {
 .form-group input,
 .form-group select,
 .form-group textarea {
-    width: 100%;
+    flex-grow: 1;
+    padding: 8px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    border: 1px solid #ccc; /* Cor da borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    box-shadow: none; /* Remover sombras */
+    outline: none; /* Remover borda azul padrão ao focar */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave */
 }
 
 textarea {
@@ -338,7 +347,7 @@ textarea {
                     case 'number':
                         $this->html .= "
                     <label for='" . (isset($parametro['nome_input']) ? $parametro['nome_input'] : $campo) . "'>" . ucfirst($campo) . "</label>
-                    <input type='number' id='" . (isset($parametro['nome_input']) ? $parametro['nome_input'] : $campo) . "' name='" . (isset($parametro['nome_input']) ? $parametro['nome_input'] : $campo) . "' value='" . $parametro['valor'] . "'>";
+                    <input type='number' id='" . (isset($parametro['nome_input']) ? $parametro['nome_input'] : $campo) . "' name='" . (isset($parametro['nome_input']) ? $parametro['nome_input'] : $campo) . "' value='" . $parametro['valor'] . "' step='" . (isset($parametro['step']) ? $parametro['step'] : '') . "'>";
                         break;
 
                     case 'tel':

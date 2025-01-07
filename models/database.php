@@ -11,7 +11,7 @@ function conecta_banco()
 
     try {
         $conn = new mysqli($host, $usr, $psswd, $_ENV['DB_NAME']);
-        mysqli_set_charset($conn, 'utf8mb4');
+        $conn->set_charset("utf8mb4");
     } catch (mysqli_sql_exception $e) {
 
         file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\nerro ao conectar com o banco", FILE_APPEND);
