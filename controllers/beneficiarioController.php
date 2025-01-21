@@ -35,7 +35,6 @@ class beneficiarioController
         $_SESSION['dados'] = $retorno;
 
         return $_ENV['PROJECT_ROOT'] . '/views/beneficiario/listar_beneficiarios.php';
-
     }
 
     public function deletar($dados)

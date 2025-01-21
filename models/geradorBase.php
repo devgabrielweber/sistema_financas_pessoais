@@ -166,6 +166,10 @@ tr:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.horizontal{
+    flex-grow: 0;
+}
+
 .form-group {
     display: flex;
     margin-bottom: 15px;
@@ -174,7 +178,6 @@ tr:hover {
 .form-group label {
     width: 200px;
     font-weight: bold;
-    display: flex;
     align-items: center;
 }
 
@@ -189,10 +192,6 @@ tr:hover {
 
 .form-group input[type='radio'] {
     width: auto;
-}
-
-.form-group select {
-    height: 35px;
 }
 
 .form-footer {
@@ -412,12 +411,29 @@ textarea {
         foreach ($parametros['botoes'] as $botao => $rota) {
             $this->html .= "<div><button onclick=\"redirecionar('" . $rota . "')\">" . ucfirst($botao) . "</button></div>";
         }
-        $this->html .= "        
-        </div><div class=\"table-container\">
+
+        $this->html .= "  
+        </div><div class=\"table-container\">";
+
+        $this->html .= '
+        <div class="form-group horizontal">
+            <form method="POST" action="index.php">
+                <label for="campo">Campo: </label>
+                <select name="campo">';
+        foreach ($parametros['searchCampos'] as $campo => $valor) {
+            $this->html .= "<option value='" . $valor . "'>" . ucfirst($campo) . "</option>";
+        }
+        $this->html .= '</select>
+                <input type="text" name="valor" placeholder="Valor...">
+                <input type="hidden" name="rota" value="' . $parametros['searchRota'] . '">
+                <button type="submit" class="action-button grid">Enviar</button>
+            </form>
+            </div>
+        ';
+        $this->html .= "
             <table>
                 <thead>
                     <tr>";
-
         foreach ($parametros['dados'][0] as $coluna => $valor) {
             $this->html .= "<th>" . ucfirst($coluna) . "</th>";
         }

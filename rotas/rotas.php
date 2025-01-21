@@ -3,6 +3,12 @@ require_once __DIR__ . '/../inicial/init.php';
 
 $redirecionadorController->set_rotas('cliente.listar', 'clienteController@listar');
 
+
+
+//################################
+
+$redirecionadorController->set_rotas('contas.search', 'contasController@search');
+
 $redirecionadorController->set_rotas('contas.listar', 'contasController@listar');
 
 $redirecionadorController->set_rotas('contas.cadastrar', 'contasController@cadastrar');

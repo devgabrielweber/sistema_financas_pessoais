@@ -45,7 +45,7 @@ class conta
     public function search($dados)
     {
         try {
-            $query = "SELECT * FROM contas WHERE " . $dados['campo'] . " LIKE " . $dados['valor'];
+            $query = "SELECT * FROM contas WHERE " . $dados['campo'] . " LIKE '" . $dados['valor'] . "'";
             file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n A query é:" . $query, FILE_APPEND);
             $return = $this->conn->query($query);
         } catch (\Throwable $th) {
@@ -75,9 +75,12 @@ class conta
     public function ver($dados)
     {
         $query = "SELECT * FROM contas WHERE id = " . $dados['id'];
-        $result = $this->conn->query($query);
 
         file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n a query retornada no model de contas.ver:" . $query, FILE_APPEND);
+
+        file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n dados que chegaram no model conta" . json_encode($dados), FILE_APPEND);
+
+        $result = $this->conn->query($query);
 
         file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n contas.ver no controller resutou isso na query:" . json_encode($result), FILE_APPEND);
 
