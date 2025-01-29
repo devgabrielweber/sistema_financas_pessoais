@@ -19,6 +19,9 @@ $redirecionadorController->set_rotas('contas.atualizar', 'contasController@atual
 
 $redirecionadorController->set_rotas('contas.deletar', 'contasController@deletar');
 
+
+$redirecionadorController->set_rotas('beneficiarios.search', 'beneficiarioController@search');
+
 $redirecionadorController->set_rotas('beneficiarios.listar', 'beneficiarioController@listar');
 
 $redirecionadorController->set_rotas('beneficiarios.deletar', 'beneficiarioController@deletar');
@@ -30,6 +33,9 @@ $redirecionadorController->set_rotas('beneficiarios.ver', 'beneficiarioControlle
 $redirecionadorController->set_rotas('beneficiarios.cadastrar', 'beneficiarioController@cadastrar');
 
 
+
+$redirecionadorController->set_rotas('categorias.search', 'categoriasController@search');
+
 $redirecionadorController->set_rotas('categorias.listar', 'categoriasController@listar');
 
 $redirecionadorController->set_rotas('categorias.cadastrar', 'categoriasController@cadastrar');
@@ -40,6 +46,9 @@ $redirecionadorController->set_rotas('categorias.atualizar', 'categoriasControll
 
 $redirecionadorController->set_rotas('categorias.deletar', 'categoriasController@deletar');
 
+
+
+$redirecionadorController->set_rotas('transacoes.search', 'transacoesController@search');
 
 $redirecionadorController->set_rotas('transacoes.listar', 'transacoesController@listar');
 

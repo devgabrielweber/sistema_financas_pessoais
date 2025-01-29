@@ -2,13 +2,19 @@
 <?php
 require __DIR__ . "/../../inicial/init.php";
 //require_once $_ENV["PROJECT_ROOT"] . "/controllers/categoriasController.php";
-if (!isset($dados)) {
+if (!isset($_SESSION['dados'])) {
     $redirecionadorController->redirecionar('categorias.listar', 0, 'view');
     die();
 }
 $htmlFinal = $htmlPagina->geraGrid([
     'titulo' => 'Listar categorias',
-    'dados' => $dados,
+    'dados' => $_SESSION['dados'],
+    'searchCampos' => [
+        'id' => 'id',
+        'nome' => 'nome',
+        'descrição' => 'descricao'
+    ],
+    'searchRota' => 'categorias.search',
     'botoes' => [
         'cadastrar' => 'categorias.cadastrar'
     ],

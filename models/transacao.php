@@ -13,8 +13,16 @@ class transacao
 
     public function listar()
     {
-        $listagem = $this->conn->query("SELECT transacoes.id, tipo, valor, beneficiarios.nome as 'Nome Beneficiario', contas.nome as 'Conta', categorias.nome as 'Categoria' FROM " . $_ENV['DB_NAME'] . ".
-            transacoes INNER JOIN beneficiarios ON transacoes.id_beneficiario = beneficiarios.id INNER JOIN contas ON transacoes.id_conta = contas.id INNER JOIN categorias ON transacoes.id_categoria = categorias.id ORDER BY transacoes.id DESC");
+        file_put_contents($_ENV['PROJECT_ROOT'] . '/saida_log.txt', 'passou da listagem', FILE_APPEND);
+
+        $query = "SELECT transacoes.id, tipo, valor, beneficiarios.nome as 'Nome Beneficiario', contas.nome as 'Conta', categorias.nome as 'Categoria' FROM " . $_ENV['DB_NAME'] . ".
+            transacoes INNER JOIN beneficiarios ON transacoes.id_beneficiario = beneficiarios.id INNER JOIN contas ON transacoes.id_conta = contas.id INNER JOIN categorias ON transacoes.id_categoria = categorias.id ORDER BY transacoes.id DESC";
+
+        file_put_contents($_ENV['PROJECT_ROOT'] . '/saida_log.txt', '\n\n ' . $query, FILE_APPEND);
+
+        $listagem = $this->conn->query($query);
+
+        file_put_contents($_ENV['PROJECT_ROOT'] . '/saida_log.txt', '\n\n ' . json_encode($listagem), FILE_APPEND);
 
         while ($row = $listagem->fetch_assoc()) {
             $resul_preparado[] = $row;
@@ -45,7 +53,7 @@ class transacao
     public function search($dados)
     {
         try {
-            $query = "SELECT * FROM transacoes WHERE " . $dados['campo'] . " LIKE " . $dados['valor'];
+            $query = "SELECT * FROM transacoes WHERE " . $dados['campo'] . " LIKE '" . $dados['valor'] . "'";
             file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n A query é:" . $query, FILE_APPEND);
             $return = $this->conn->query($query);
         } catch (\Throwable $th) {

@@ -45,7 +45,7 @@ class categoria
     public function search($dados)
     {
         try {
-            $query = "SELECT * FROM categorias WHERE " . $dados['campo'] . " LIKE " . $dados['valor'];
+            $query = "SELECT * FROM categorias WHERE " . $dados['campo'] . " LIKE '" . $dados['valor'] . "'";
             file_put_contents($_ENV["PROJECT_ROOT"] . "/saida_log.txt", "\n A query é:" . $query, FILE_APPEND);
             $return = $this->conn->query($query);
         } catch (\Throwable $th) {
